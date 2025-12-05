@@ -17,12 +17,13 @@
         });
 
         // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
-                mobileMenuToggle.classList.remove('active');
-                mobileNav.classList.remove('active');
-            }
-        });
+document.addEventListener('click', (e) => {
+  if (!mobileMenuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+    mobileMenuToggle.classList.remove('active');
+    mobileNav.classList.remove('active');
+  }
+});
+
 
         // Enhanced smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -247,4 +248,43 @@ prevBtn.addEventListener('click', () => {
 nextBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % items.length;
   updateCoverflow();
+});
+// Tabs Filter
+const categoryTabs = document.querySelectorAll('.category-tab');
+const skillItems = document.querySelectorAll('.skill-item');
+
+categoryTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const category = tab.getAttribute('data-category');
+
+        skillItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            if(category === 'all' || itemCategory === category) {
+                item.style.display = 'block';
+                item.style.opacity = 0;
+                setTimeout(() => item.style.opacity = 1, 50);
+            } else {
+                item.style.opacity = 0;
+                setTimeout(() => item.style.display = 'none', 300);
+            }
+        });
+    });
+});
+
+// Skill Level Animation on Scroll
+const skillLevels = document.querySelectorAll('.skill-level-fill');
+
+const skillObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.style.animation = 'fillLevel 2s forwards';
+        }
+    });
+}, { threshold: 0.5 });
+
+skillLevels.forEach(level => {
+    skillObserver.observe(level);
 });

@@ -754,39 +754,39 @@
      padding: 150px 0;
      position: relative;
 }
- .hexagon-container {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     flex-wrap: wrap;
-     gap: 40px;
-     max-width: 1200px;
-     margin: 0 auto;
-     padding: 0 20px;
+.hexagon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+/* هذه المسافة الحالية بين البطاقات */
+    max-width: 1200px;
+
+
 }
- .hexagon {
-     width: 220px;
-     height: 290px;
-     position: relative;
-     margin: 20px;
-     transition: all 0.4s ease;
+
+.hexagon {
+    width: 330px;      /* العرض الجديد */
+    height: 360px;     /* ارتفاع مناسب */
+    position: center;
+    margin: 30px; /* مسافة مرتبة */
+    transition: all 0.4s ease;
 }
+
+
  .hexagon:hover {
      transform: scale(1.1);
 }
  .hexagon-inner {
-     width: 200px;
-     height: 360px;
-     position: relative;
-     transform: rotate(30deg);
-     border-radius: 25px;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     text-align: center;
-     overflow: hidden;
-     transition: all 0.4s ease;
+    padding: 40px 25px;  /* 40px من فوق وتحت، 25px يمين ويسار */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 25px;
+    overflow: hidden;
+    transition: all 0.4s ease;
 }
  .hexagon:hover .hexagon-inner {
      transform: rotate(0deg);
@@ -835,6 +835,44 @@
  .hexagon:hover p {
      transform: rotate(0deg);
 }
+@media (max-width: 480px) {
+
+    .hexagon-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 50px !important; /* مسافة واضحة بين البطاقات */
+        padding: 20px 10px !important;
+    }
+
+    .hexagon {
+        width: 320px !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important; /* يلغي كل translate أو rotate */
+    }
+
+    .hexagon-inner {
+        width: 100% !important;
+        padding: 35px 20px !important;
+        text-align: center !important;
+        transform: none !important; /* يلغي rotate الداخلي */
+        border-radius: 20px !important;
+    }
+
+    .hexagon h4, .hexagon p {
+        margin-bottom: 12px !important;
+        transform: none !important;
+    }
+
+    .hexagon-icon {
+        font-size: 36px !important;
+        margin-bottom: 15px !important;
+        transform: none !important;
+    }
+}
+
+
 /* Section 4: Enhanced Timeline */
  .timeline {
      padding: 100px 0;
@@ -1198,6 +1236,11 @@ footer::before {
          max-width: 100%;
     }
 }
+@media (min-width: 992px) {
+    .hexagon {
+        width: 320px;
+    }
+}
 
 @media (max-width: 1000px) {
     .nav-links {
@@ -1256,7 +1299,7 @@ footer::before {
     }
     
     .hexagon-inner {
-        padding: 60px 35px; /* More padding for larger content area */
+       padding: 25px 15px;  /* أصغر شوي عشان يناسب شاشة صغيرة */
     }
     
     .hexagon-icon {
@@ -1294,6 +1337,21 @@ footer::before {
      .footer-links a {
          font-size: 0.85rem;
     }
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hexagon {
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: calc(0.2s * var(--i)); /* تأخير ديناميكي لكل بطاقة */
 }
 /* Enhanced scrollbar */
  ::-webkit-scrollbar {
@@ -1561,5 +1619,167 @@ footer::before {
     }
     .info-panel p {
         font-size: 1rem;
+    }
+}
+:root {
+    --carbon-dark: #d2d2d2af;
+    --carbon-medium: #ffffff46;
+    --carbon-light: #5f5f5f36;
+    --metal-dark: #eb35db91;
+    --accent-cyan: #00ffd5;
+    --accent-blue: #007bff;
+    --accent-purple: #9933ff;
+    --text-primary: #ffffff;
+    --text-secondary: #bbbbbb;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--carbon-dark);
+    color: var(--text-primary);
+}
+
+.skills-section {
+    padding: 100px 20px;
+}
+
+.skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 48px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    color: var(--text-secondary);
+    font-size: 18px;
+}
+
+.skill-categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.category-tab {
+    padding: 10px 25px;
+    background: var(--carbon-medium);
+    border-radius: 30px;
+    border: 1px solid var(--metal-dark);
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.category-tab:hover {
+    background: rgba(153, 69, 255, 0.1);
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+}
+
+.category-tab.active {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+    box-shadow: 0 5px 20px rgba(153, 69, 255, 0.3);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.skill-item {
+    background: linear-gradient(135deg, var(--carbon-medium), var(--carbon-light));
+    border: 2px solid var(--metal-dark);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.skill-item:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 25px rgba(115, 143, 143, 0.4);
+}
+
+.skill-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: var(--accent-cyan);
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover .skill-icon {
+    transform: scale(1.2) translateY(-5px);
+    color: var(--accent-purple);
+}
+
+.skill-name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.skill-level {
+    width: 100%;
+    height: 6px;
+    background: var(--carbon-dark);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.skill-level-fill {
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 3px;
+    animation: fillLevel 2s forwards;
+}
+
+.skill-percentage {
+    margin-top: 10px;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    font-size: 14px;
+}
+
+@keyframes fillLevel {
+    to {
+        width: var(--skill-percent);
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
     }
 }
